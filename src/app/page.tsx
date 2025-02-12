@@ -7,6 +7,8 @@ export const metadata: Metadata = {
    description: "Your unpersonailzed feed of posts!",
 };
 
+export const revalidate = 0;
+
 export default async function Home() {
    const posts = await getPosts();
 
