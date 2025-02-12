@@ -29,6 +29,10 @@ p {
    &.primary {
       @apply bg-zinc-900 text-zinc-50 dark:bg-zinc-50 dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200;
    }
+
+   &:disabled {
+      @apply opacity-50 cursor-not-allowed;
+   }
 }
 
 .wrapper {

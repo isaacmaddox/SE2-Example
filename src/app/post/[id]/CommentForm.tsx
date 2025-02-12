@@ -19,7 +19,7 @@ export default function CommentForm({ postId }: { postId: string }) {
          {state.message && <p className="text-red-800 dark:text-red-500">{state.message}</p>}
          <div className="grid grid-cols-2 gap-4">
             <Button disabled={pending} type="submit" className="primary">
-               Comment
+               {!pending ? "Comment" : "Processing..."}
             </Button>
             <Button type="reset" className="btn">
                Cancel

@@ -35,7 +35,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
             </div>
          </header>
          <section className="wrapper">
-            <p className="text-xl leading-loose">{post.content}</p>
+            <p className="text-xl leading-loose whitespace-pre-wrap">{post.content}</p>
             <small className="block mt-8 wrapper text-zinc-500 dark:text-zinc-400">
                Posted on {post.createdAt.toLocaleDateString()} at{" "}
                {post.createdAt.toLocaleTimeString("en-US", {

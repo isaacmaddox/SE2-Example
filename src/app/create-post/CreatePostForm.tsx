@@ -25,7 +25,7 @@ export default function CreatePostForm() {
          {state.message && <p className="text-red-800 dark:text-red-500">{state.message}</p>}
          <div className="grid grid-cols-2 gap-4">
             <Button disabled={pending} type="submit" className="primary">
-               Create Post
+               {!pending ? "Create Post" : "Processing..."}
             </Button>
             <Link href="/" className="btn">
                Cancel
