@@ -2,6 +2,8 @@ import { getPost, getPostWithComments } from "@/entities/post/actions";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import CommentForm from "./CommentForm";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export const generateMetadata = async ({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> => {
    const { id } = await params;
@@ -35,7 +37,9 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
             </div>
          </header>
          <section className="wrapper">
-            <p className="text-xl leading-loose whitespace-pre-wrap">{post.content}</p>
+            <Markdown remarkPlugins={[remarkGfm]} className="post-body text-xl leading-loose whitespace-pre-wrap">
+               {post.content}
+            </Markdown>
             <small className="block mt-8 wrapper text-zinc-500 dark:text-zinc-400">
                Posted on {post.createdAt.toLocaleDateString()} at{" "}
                {post.createdAt.toLocaleTimeString("en-US", {

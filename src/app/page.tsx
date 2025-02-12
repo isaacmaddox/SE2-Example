@@ -1,6 +1,8 @@
 import { getPosts } from "@/entities/post/actions";
 import { Metadata } from "next";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export const metadata: Metadata = {
    title: "Your Feed",
@@ -35,15 +37,17 @@ export default async function Home() {
                         <li key={post.id} className="py-6 my-6 border-b-[1px] border-zinc-200 dark:border-zinc-800">
                            <Link href={`/post/${post.id}`}>
                               <h2>{post.title}</h2>
-                              <p className="my-5 whitespace-pre-wrap">{post.content}</p>
-                              <small className="text-zinc-500 dark:text-zinc-400">
-                                 Posted on {post.createdAt.toLocaleDateString()} at{" "}
-                                 {post.createdAt.toLocaleTimeString("en-US", {
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                 })}
-                              </small>
                            </Link>
+                           <ReactMarkdown remarkPlugins={[remarkGfm]} className="post-body my-5 whitespace-pre-wrap">
+                              {post.content}
+                           </ReactMarkdown>
+                           <small className="text-zinc-500 dark:text-zinc-400">
+                              Posted on {post.createdAt.toLocaleDateString()} at{" "}
+                              {post.createdAt.toLocaleTimeString("en-US", {
+                                 hour: "2-digit",
+                                 minute: "2-digit",
+                              })}
+                           </small>
                         </li>
                      );
                   })}
