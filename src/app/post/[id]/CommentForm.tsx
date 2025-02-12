@@ -2,7 +2,6 @@
 
 import Button from "@/components/Button";
 import { createComment } from "@/entities/post/actions";
-import Link from "next/link";
 import { useActionState } from "react";
 
 export default function CommentForm({ postId }: { postId: string }) {

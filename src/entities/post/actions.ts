@@ -2,12 +2,12 @@
 
 import { PostService } from "./service";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+
 export const getPosts = async () => {
    return PostService.getPosts();
 }
 
-export async function createPost(_: any, formData: FormData) {
+export async function createPost(_: unknown, formData: FormData) {
    const title = formData.get("title")?.toString();
    const content = formData.get("content")?.toString();
 
@@ -36,7 +36,7 @@ export const getPostWithComments = async (id: string) => {
    return PostService.getPostWithComments(parseInt(id));
 };
 
-export const createComment = async (_: any, formData: FormData) => {
+export const createComment = async (_: unknown, formData: FormData) => {
    const content = formData.get("content")?.toString();
    const postId = formData.get("postId")!.toString();
 

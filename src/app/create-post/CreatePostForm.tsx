@@ -31,7 +31,7 @@ export default function CreatePostForm() {
                Cancel
             </Link>
          </div>
-         <small className="text-zinc-500 dark:text-zinc-400">Posts are permanent, so don't be stupid!</small>
+         <small className="text-zinc-500 dark:text-zinc-400">Posts are permanent, so don&apos;t be stupid!</small>
       </form>
    );
 }
