@@ -2,20 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+   font-family: var(--font-figtree);
+   font-size: 1rem;
+}
+
+h1 {
+   @apply text-4xl font-semibold text-zinc-950 dark:text-zinc-50;
+}
+
+h2 {
+   @apply text-2xl font-semibold text-zinc-950 dark:text-zinc-50;
+}
+
+h3 {
+   @apply text-xl font-semibold text-zinc-950 dark:text-zinc-50;
+}
+
+p {
+   @apply leading-normal text-zinc-800 dark:text-zinc-300;
+}
+
+.btn {
+   @apply bg-transparent text-zinc-950 dark:text-zinc-50 px-4 py-3 rounded-lg border-[1px] font-semibold border-zinc-100 dark:border-zinc-800 flex items-center justify-center gap-2 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:border-zinc-200 dark:hover:border-zinc-700 transition-colors;
+
+   &.primary {
+      @apply bg-zinc-900 text-zinc-50 dark:bg-zinc-50 dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200;
+   }
+}
+
+.wrapper {
+   @apply max-w-full w-[850px] mx-auto max-lg:px-4;
+}
+
+input,
+textarea {
+   @apply bg-zinc-100 dark:bg-zinc-900 px-4 py-3 rounded-lg border-[1px] border-zinc-200 dark:border-zinc-800 resize-y w-full text-zinc-950 dark:text-zinc-50 outline-none focus-visible:ring-[3px] focus-visible:ring-zinc-50 focus-visible:ring-opacity-[12%] focus-visible:border-zinc-300 dark:focus-visible:border-zinc-700;
 }
