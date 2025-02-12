@@ -3,8 +3,10 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import CommentForm from "./CommentForm";
 
-export const generateMetadata = async ({ params }: { params: { id: string } }): Promise<Metadata> => {
-   const post = await getPost(params.id);
+export const generateMetadata = async ({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> => {
+   const { id } = await params;
+
+   const post = await getPost(id);
 
    if (!post) {
       return notFound();
@@ -16,7 +18,7 @@ export const generateMetadata = async ({ params }: { params: { id: string } }): 
    };
 };
 
-export default async function PostPage({ params }: { params: { id: string } }) {
+export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
    const { id } = await params;
 
    const post = await getPostWithComments(id);
