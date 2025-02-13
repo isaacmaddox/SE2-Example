@@ -1,5 +1,8 @@
-import { getPosts } from "@/entities/post/actions";
+import Button from "@/components/Button";
+import { getPosts } from "@/entities/post/service";
+import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -54,6 +57,19 @@ export default async function Home() {
                </ul>
             )}
          </section>
+         {process.env.NODE_ENV === "development" && posts.length > 0 && (
+            <section className="wrapper pb-8">
+               <Button
+                  onClick={async () => {
+                     "use server";
+                     await prisma.post.deleteMany();
+                     redirect("/");
+                  }}
+                  className="destructive">
+                  Clear posts
+               </Button>
+            </section>
+         )}
       </>
    );
 }

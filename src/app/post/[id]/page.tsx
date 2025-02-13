@@ -1,4 +1,4 @@
-import { getPost, getPostWithComments } from "@/entities/post/actions";
+import { getPost, getPostWithComments } from "@/entities/post/service";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import CommentForm from "./CommentForm";

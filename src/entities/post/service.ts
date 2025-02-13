@@ -1,39 +1,54 @@
-import { prisma } from "@/lib/prisma";
+"use server";
 
-export const PostService = {
-   async getPosts() {
-      return prisma.post.findMany({
-         orderBy: {
-            createdAt: "desc",
-         },
-         where: {
-            parentId: null,
-         },
-      });
-   },
+import { PostDAO } from "./dao";
+import { redirect } from "next/navigation";
 
-   async createPost(title: string, content: string) {
-      return prisma.post.create({
-         data: { title, content },
-      });
-   },
+export const getPosts = async () => {
+   return PostDAO.getPosts();
+}
 
-   async getPost(id: number) {
-      return prisma.post.findUnique({
-         where: { id },
-      });
-   },
+export async function createPost(_: unknown, formData: FormData) {
+   const title = formData.get("title")?.toString();
+   const content = formData.get("content")?.toString();
 
-   async getPostWithComments(id: number) {
-      return prisma.post.findUnique({
-         where: { id },
-         include: { comments: { orderBy: { createdAt: "desc" } } },
-      });
-   },
+   if (!title || !content) {
+      return { message: "Title and content are required" };
+   }
 
-   async createComment(postId: number, content: string) {
-      return prisma.post.create({
-         data: { content, parent: { connect: { id: postId } } },
-      });
-   },
+   if (content.length < 10) {
+      return { message: "Content must be at least 10 characters long" };
+   }
+
+   if (content.length > 250) {
+      return { message: "Content must be less than 250 characters long" };
+   }
+
+   await PostDAO.createPost(title, content);
+
+   redirect("/");
 };
+
+export const getPost = async (id: string) => {
+   return PostDAO.getPost(parseInt(id));
+};
+
+export const getPostWithComments = async (id: string) => {
+   return PostDAO.getPostWithComments(parseInt(id));
+};
+
+export const createComment = async (_: unknown, formData: FormData) => {
+   const content = formData.get("content")?.toString();
+   const postId = formData.get("postId")!.toString();
+
+   if (!content) {
+      return { message: "Content is required" };
+   }
+
+   if (content.length < 10) {
+      return { message: "Content must be at least 10 characters long" };
+   }
+
+   await PostDAO.createComment(parseInt(postId), content);
+
+   redirect(`/post/${postId}`);
+}

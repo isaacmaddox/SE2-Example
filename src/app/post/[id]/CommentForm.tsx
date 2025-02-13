@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
-import { createComment } from "@/entities/post/actions";
+import { createComment } from "@/entities/post/service";
 import { useActionState } from "react";
 
 export default function CommentForm({ postId }: { postId: string }) {

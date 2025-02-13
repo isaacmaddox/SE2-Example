@@ -2,7 +2,7 @@
 
 import Button from "@/components/Button";
 import { useActionState } from "react";
-import { createPost } from "@/entities/post/actions";
+import { createPost } from "@/entities/post/service";
 import Link from "next/link";
 
 export default function CreatePostForm() {
